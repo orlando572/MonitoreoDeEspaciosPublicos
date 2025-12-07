@@ -15,7 +15,7 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
   }, []);
 
   const getIcon = (nombre) => {
-    if (nombre.toLowerCase().includes('cafeteria')) return Coffee;
+    if (nombre.toLowerCase().includes('cafetería')) return Coffee;
     if (nombre.toLowerCase().includes('patio') && nombre.toLowerCase().includes('trasero')) return Headphones;
     if (nombre.toLowerCase().includes('patio') && nombre.toLowerCase().includes('central')) return Home;
     if (nombre.toLowerCase().includes('patio')) return Headphones;
@@ -30,23 +30,48 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm h-screen bg-white shadow-2xl flex flex-col">
 
-        <div className="bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-6 rounded-b-3xl">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-6">
           <div className="flex justify-between items-center mb-4">
+
+            {/* Perfil + Nombre */}
             <div className="flex items-center gap-2">
-              <button onClick={onOpenProfile} className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+
+              {/* Botón icono usuario con hover */}
+              <button 
+                onClick={onOpenProfile} 
+                className="w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-300 transition"
+              >
                 <User className="w-5 h-5 text-purple-600" />
               </button>
-              <span className="text-white text-lg font-medium">Hola, {user?.nombre?.split(' ')[0]}</span>
+
+              {/* Nombre clickable con hover */}
+              <button 
+                onClick={onOpenProfile}
+                className="text-white text-lg font-medium hover:text-gray-300 transition"
+              >
+                Hola, {user?.nombre?.split(' ')[0]}
+              </button>
+
             </div>
-            <Bell className="w-6 h-6 text-white" />
+
+            {/* Campana con hover */}
+            <button className="hover:text-gray-200 transition">
+              <Bell className="w-6 h-6 text-white" />
+            </button>
+
           </div>
-          <h1 className="text-white text-3xl font-bold">Sede</h1>
+
+          <h1 className="text-white text-2xl font-bold">Sede</h1>
         </div>
 
+        {/* Lista de ubicaciones */}
         <div className="flex-1 overflow-y-auto">
           <div className="grid grid-cols-2">
-            <div className="border-r border-gray-200">
-              <div className="py-4 text-center font-medium text-gray-900 border-b border-gray-200">
+
+            {/* Parra */}
+            <div className="border-r border-gray-300">
+              <div className="py-4 text-center font-medium text-gray-900 border-b border-gray-300 text-2xl">
                 Parra
               </div>
               <div className="px-3 py-6 space-y-4">
@@ -58,18 +83,19 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
                       onClick={() => onSelectLocation(ubicacion)}
                       className="w-full flex flex-col items-center"
                     >
-                      <div className="w-full aspect-square bg-purple-100 rounded-3xl flex items-center justify-center mb-3 hover:bg-purple-200 transition-colors">
-                        <Icon className="w-10 h-10 text-gray-800" strokeWidth={1.5} />
+                      <div className="w-32 aspect-square bg-purple-100 rounded-2xl flex items-center justify-center mb-2 hover:bg-purple-200 transition-colors">
+                        <Icon className="w-17 h-17 text-gray-800" strokeWidth={1.5} />
                       </div>
-                      <span className="text-sm text-gray-800 text-center">{ubicacion.nombre}</span>
+                      <span className="text-sm text-gray-800 text-center text-xl">{ubicacion.nombre}</span>
                     </button>
                   );
                 })}
               </div>
             </div>
 
+            {/* Tacna */}
             <div>
-              <div className="py-4 text-center font-medium text-gray-900 border-b border-gray-200">
+              <div className="py-4 text-center font-medium text-gray-900 border-b border-gray-300 text-2xl">
                 Tacna
               </div>
               <div className="px-3 py-6 space-y-4">
@@ -81,17 +107,19 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
                       onClick={() => onSelectLocation(ubicacion)}
                       className="w-full flex flex-col items-center"
                     >
-                      <div className="w-full aspect-square bg-purple-100 rounded-3xl flex items-center justify-center mb-3 hover:bg-purple-200 transition-colors">
-                        <Icon className="w-10 h-10 text-gray-800" strokeWidth={1.5} />
+                      <div className="w-32 aspect-square bg-purple-100 rounded-2xl flex items-center justify-center mb-2 hover:bg-purple-200 transition-colors">
+                        <Icon className="w-17 h-17 text-gray-800" strokeWidth={1.5} />
                       </div>
-                      <span className="text-sm text-gray-800 text-center">{ubicacion.nombre}</span>
+                      <span className="text-sm text-gray-800 text-center text-xl">{ubicacion.nombre}</span>
                     </button>
                   );
                 })}
               </div>
             </div>
+
           </div>
         </div>
+
       </div>
     </div>
   );

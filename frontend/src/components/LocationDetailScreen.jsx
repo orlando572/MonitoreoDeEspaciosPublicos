@@ -24,7 +24,7 @@ const LocationDetailScreen = ({ ubicacion, onBack }) => {
   }, [ubicacion.id]);
 
   const getIcon = (nombre) => {
-    if (nombre.toLowerCase().includes('cafeteria')) return Coffee;
+    if (nombre.toLowerCase().includes('cafetería')) return Coffee;
     if (nombre.toLowerCase().includes('patio') && nombre.toLowerCase().includes('trasero')) return Headphones;
     if (nombre.toLowerCase().includes('patio')) return Headphones;
     if (nombre.toLowerCase().includes('azotea')) return Sun;
@@ -49,14 +49,18 @@ const LocationDetailScreen = ({ ubicacion, onBack }) => {
         <div className="bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-6 rounded-b-3xl">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-3">
-              <button onClick={onBack}>
-                <ArrowLeft className="w-6 h-6 text-white" />
-              </button>
+              <button 
+  onClick={onBack}
+  className="p-2 rounded-full hover:bg-white/20 transition"
+>
+  <ArrowLeft className="w-6 h-6 text-white" />
+</button>
+
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                   <User className="w-5 h-5 text-purple-600" />
                 </div>
-                <span className="text-white text-base font-medium">Hola, {user?.nombre?.split(' ')[0]}</span>
+                <span className="text-white text-lg text-base font-medium">Hola, {user?.nombre?.split(' ')[0]}</span>
               </div>
             </div>
             <Bell className="w-6 h-6 text-white" />
@@ -67,13 +71,13 @@ const LocationDetailScreen = ({ ubicacion, onBack }) => {
         <div className="flex-1 overflow-y-auto px-6 py-6">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-semibold text-gray-900">{ubicacion.nombre}</h2>
+              <h2 className="font-semibold text-gray-900 text-2xl">{ubicacion.nombre}</h2>
               <Icon className="w-5 h-5 text-gray-700" />
             </div>
-            <span className="text-base text-gray-700">{ubicacion.sede}</span>
+            <span className="text-base text-gray-700 text-xl">{ubicacion.sede}</span>
           </div>
 
-          <p className="text-sm text-gray-600 mb-4">Mapa de calor</p>
+          <p className="text-lg text-gray-600 mb-4">Mapa de calor</p>
 
           {!data?.id ? (
             <div className="mb-6 p-8 bg-gray-50 rounded-2xl border-2 border-gray-200 text-center">
@@ -90,33 +94,31 @@ const LocationDetailScreen = ({ ubicacion, onBack }) => {
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Clock className="w-5 h-5 text-gray-700" />
-                  <span className="text-gray-700 text-base">Actualizado:</span>
-                  <span className="text-gray-900 text-base ml-auto">
-                    {formatTime(data.fecha_hora)}
-                  </span>
+                  <span className="text-gray-700 text-lg">Actualizado:</span>
+                  <span className="text-gray-900 text-lg ml-auto">{formatTime(data.fecha_hora)}</span>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <Users className="w-5 h-5 text-gray-700" />
-                  <span className="text-gray-700 text-base">Personas:</span>
-                  <span className="text-gray-900 text-base ml-auto">{data.total_personas}</span>
+                  <span className="text-gray-700 text-lg">Personas:</span>
+                  <span className="text-gray-900 text-lg ml-auto">{data.total_personas}</span>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <Table className="w-5 h-5 text-gray-700" />
-                  <span className="text-gray-700 text-base">Mesas libres:</span>
-                  <span className="text-gray-900 text-base ml-auto">{data.total_mesas_libres}</span>
+                  <span className="text-gray-700 text-lg">Mesas libres:</span>
+                  <span className="text-gray-900 text-lg ml-auto">{data.total_mesas_libres}</span>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <Zap className="w-5 h-5 text-gray-700" />
-                  <span className="text-gray-700 text-base">Enchufes disp:</span>
-                  <span className="text-gray-900 text-base ml-auto">N/A</span>
+                  <span className="text-gray-700 text-lg">Enchufes disp:</span>
+                  <span className="text-gray-900 text-lg ml-auto">No disponible</span>
                 </div>
               </div>
 
               <div className="mt-8 flex justify-center">
-                <button className="bg-purple-100 text-purple-900 px-8 py-4 rounded-full flex items-center gap-2 font-medium hover:bg-purple-200 transition-colors">
+                <button className="text-lg bg-purple-100 text-purple-900 px-9 py-5 rounded-full flex items-center gap-2 font-medium hover:bg-purple-200 transition-colors">
                   <Bell className="w-5 h-5" />
                   Notificarme
                 </button>
