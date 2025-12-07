@@ -2,8 +2,6 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional, List
 from datetime import datetime
 
-# ==================== SCHEMAS DE USUARIO ====================
-
 class UsuarioRegistro(BaseModel):
     nombre: str
     email: EmailStr
@@ -27,8 +25,6 @@ class UsuarioResponse(BaseModel):
     celular: Optional[str]
     foto_url: Optional[str]
 
-# ==================== SCHEMAS DE FEEDBACK ====================
-
 class FeedbackCreate(BaseModel):
     mensaje: str
 
@@ -38,21 +34,15 @@ class FeedbackResponse(BaseModel):
     mensaje: str
     fecha: datetime
 
-# ==================== SCHEMAS DE UBICACIÓN ====================
-
 class UbicacionResponse(BaseModel):
     id: int
     nombre: str
     sede: str
 
-# ==================== SCHEMAS DE CONTEO ====================
-
 class ConteoResponse(BaseModel):
     zona: int
     personas: int
     mesas_libres: int
-
-# ==================== SCHEMAS DE CAPTURA ====================
 
 class CapturaResponse(BaseModel):
     id: int

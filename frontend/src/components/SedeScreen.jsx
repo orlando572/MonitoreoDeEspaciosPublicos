@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Bell, User, Coffee, Headphones, Home, Sun } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { apiClient } from '../config/api';
