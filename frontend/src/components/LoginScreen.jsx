@@ -33,14 +33,11 @@ const LoginScreen = ({ onRegister }) => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm h-screen bg-white shadow-2xl flex flex-col">
-        <div className="flex justify-between items-center px-6 py-2 bg-white">
-          <span className="text-sm font-medium">9:30</span>
-        </div>
 
         <div className="flex-1 flex flex-col justify-center px-6">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Bienvenido</h1>
-            <p className="text-gray-600">Sistema de Monitoreo UNSA</p>
+            <p className="text-gray-600">Sistema de Monitoreo UTP</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
@@ -93,10 +90,6 @@ const LoginScreen = ({ onRegister }) => {
           >
             ¿No tienes cuenta? Regístrate
           </button>
-        </div>
-
-        <div className="flex justify-center py-2 pb-4">
-          <div className="w-32 h-1 bg-gray-800 rounded-full"></div>
         </div>
       </div>
     </div>

@@ -44,9 +44,6 @@ const ProfileScreen = ({ onClose }) => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm h-screen bg-white shadow-2xl flex flex-col">
-        <div className="flex justify-between items-center px-6 py-2 bg-white">
-          <span className="text-sm font-medium">9:30</span>
-        </div>
 
         <div className="flex justify-end px-6 pt-4">
           <button onClick={onClose} className="text-purple-600">
@@ -145,9 +142,6 @@ const ProfileScreen = ({ onClose }) => {
           </button>
         </div>
 
-        <div className="flex justify-center py-2 pb-4">
-          <div className="w-32 h-1 bg-gray-800 rounded-full"></div>
-        </div>
       </div>
     </div>
   );

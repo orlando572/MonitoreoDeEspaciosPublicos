@@ -29,9 +29,6 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm h-screen bg-white shadow-2xl flex flex-col">
-        <div className="flex justify-between items-center px-6 py-2 bg-white">
-          <span className="text-sm font-medium">9:30</span>
-        </div>
 
         <div className="bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-6 rounded-b-3xl">
           <div className="flex justify-between items-center mb-4">
@@ -94,10 +91,6 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="flex justify-center py-2 pb-4">
-          <div className="w-32 h-1 bg-gray-800 rounded-full"></div>
         </div>
       </div>
     </div>
