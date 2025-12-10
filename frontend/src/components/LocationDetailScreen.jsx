@@ -49,13 +49,12 @@ const LocationDetailScreen = ({ ubicacion, onBack }) => {
         <div className="bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-6 rounded-b-3xl">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-3">
-              <button 
-  onClick={onBack}
-  className="p-2 rounded-full hover:bg-white/20 transition"
->
-  <ArrowLeft className="w-6 h-6 text-white" />
-</button>
-
+              <button
+                onClick={onBack}
+                className="p-2 rounded-full hover:bg-white/20 transition"
+              >
+                <ArrowLeft className="w-6 h-6 text-white" />
+              </button>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                   <User className="w-5 h-5 text-purple-600" />

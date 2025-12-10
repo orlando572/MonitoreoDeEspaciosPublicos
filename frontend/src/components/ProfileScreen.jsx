@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { X, Phone, Mail, Edit2, Send } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { apiClient } from '../config/api';
+import NotificationModal from './NotificationModal';
 
 const ProfileScreen = ({ onClose }) => {
   const { user, logout } = useAuth();
@@ -13,16 +14,29 @@ const ProfileScreen = ({ onClose }) => {
   });
   const [feedback, setFeedback] = useState('');
 
+  const [modal, setModal] = useState({
+    isOpen: false,
+    type: 'success',
+    title: '',
+    message: ''
+  });
+
+  const showModal = (type, title, message) => {
+    setModal({ isOpen: true, type, title, message });
+  };
+
   const handleUpdate = async () => {
     try {
       const response = await apiClient.put(`/usuario/${user.id}`, formData);
 
       if (response.ok) {
-        alert('Perfil actualizado');
+        showModal('success', 'PERFIL ACTUALIZADO', 'Tus datos se han guardado correctamente.');
         setEditing(false);
+      } else {
+        showModal('error', 'ERROR', 'No se pudo actualizar el perfil.');
       }
     } catch (err) {
-      alert('Error al actualizar');
+      showModal('error', 'ERROR DE CONEXIÓN', 'Ocurrió un error al intentar actualizar.');
     }
   };
 
@@ -33,16 +47,28 @@ const ProfileScreen = ({ onClose }) => {
       const response = await apiClient.post(`/feedback/${user.id}`, { mensaje: feedback });
 
       if (response.ok) {
-        alert('Feedback enviado. ¡Gracias!');
+        showModal('success', 'FEEDBACK ENVIADO', '¡Gracias por tus comentarios! Nos ayudan a mejorar.');
         setFeedback('');
+      } else {
+        showModal('error', 'ERROR', 'No se pudo enviar el feedback.');
       }
     } catch (err) {
-      alert('Error al enviar feedback');
+      showModal('error', 'ERROR', 'Error de conexión al enviar feedback.');
     }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
+
+      {/* Modal */}
+      <NotificationModal
+        isOpen={modal.isOpen}
+        onClose={() => setModal({ ...modal, isOpen: false })}
+        type={modal.type}
+        title={modal.title}
+        message={modal.message}
+      />
+
       <div className="w-full max-w-sm h-screen bg-white shadow-2xl flex flex-col">
 
         {/* Cerrar */}
@@ -56,6 +82,8 @@ const ProfileScreen = ({ onClose }) => {
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 pb-6">
+          
+          {/* Perfil */}
           <div className="flex items-center gap-4 mb-8">
             <div className="w-25 h-25 rounded-full border-2 border-gray-500 flex items-center justify-center">
               <svg viewBox="0 0 24 24" className="w-12 h-12" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -71,7 +99,6 @@ const ProfileScreen = ({ onClose }) => {
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-medium text-gray-900">Mis datos personales</h3>
 
-              {/* Editar/Guardar */}
               <button 
                 onClick={() => editing ? handleUpdate() : setEditing(true)}
                 className="flex items-center gap-1 text-purple-600 hover:text-purple-800 transition"
@@ -155,8 +182,8 @@ const ProfileScreen = ({ onClose }) => {
           >
             Cerrar sesión
           </button>
-        </div>
 
+        </div>
       </div>
     </div>
   );
