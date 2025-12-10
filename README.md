@@ -7,15 +7,15 @@ Este proyecto es una plataforma integral (web y móvil) diseñada para monitorea
 ### Backend (API & IA)
 
   * **Python 3.11**
-  * **FastAPI:** 
-  * **Supabase:** 
-  * **YOLO (Ultralytics) + OpenCV:** 
+  * **FastAPI** 
+  * **Supabase** 
+  * **YOLO (Ultralytics) + OpenCV** 
 
 ### Frontend (Cliente Web)
 
-  * **React + Vite:** Entorno de desarrollo frontend.
-  * **Tailwind CSS:** Framework de utilidad para el diseño de interfaces.
-  * **Lucide React:** Librería de iconos ligera y flexible.
+  * **React + Vite**
+  * **Tailwind CSS**
+  * **Lucide React**
 
 ## 📋 Requisitos Previos
 
