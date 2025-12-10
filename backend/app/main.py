@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routes import auth, usuarios, ubicaciones, capturas
 
 app = FastAPI(
-    title="Sistema Monitoreo Espacios UNSA",
+    title="Sistema Monitoreo Espacios UTP",
     description="API para monitorear espacios públicos universitarios",
     version="1.0.0"
 )
@@ -29,7 +29,7 @@ app.include_router(capturas.router)
 @app.get("/")
 async def root():
     return {
-        "message": "API Sistema Monitoreo Espacios UNSA",
+        "message": "API Sistema Monitoreo Espacios UTP",
         "version": "1.0.0",
         "status": "active"
     }
