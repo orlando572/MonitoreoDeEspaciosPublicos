@@ -70,8 +70,7 @@ async def procesar_imagen(ubicacion_id: int):
         if not ubicacion.data:
             raise HTTPException(status_code=404, detail="Ubicación no encontrada")
         
-        # SIMULACIÓN: En producción aquí ejecutarías tu script YOLO
-        # Por ahora, insertamos datos de ejemplo
+        # SIMULACIÓN
         
         # Crear registro de captura
         captura_data = {

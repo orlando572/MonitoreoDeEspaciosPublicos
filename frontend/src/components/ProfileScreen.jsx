@@ -5,7 +5,7 @@ import { apiClient } from '../config/api';
 import NotificationModal from './NotificationModal';
 
 const ProfileScreen = ({ onClose }) => {
-  const { user, logout } = useAuth();
+  const { user, logout, updateUser } = useAuth();
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
     nombre: user?.nombre || '',
@@ -30,6 +30,8 @@ const ProfileScreen = ({ onClose }) => {
       const response = await apiClient.put(`/usuario/${user.id}`, formData);
 
       if (response.ok) {
+        const data = await response.json();
+        updateUser(data.usuario);
         showModal('success', 'PERFIL ACTUALIZADO', 'Tus datos se han guardado correctamente.');
         setEditing(false);
       } else {
@@ -60,7 +62,6 @@ const ProfileScreen = ({ onClose }) => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
 
-      {/* Modal */}
       <NotificationModal
         isOpen={modal.isOpen}
         onClose={() => setModal({ ...modal, isOpen: false })}
@@ -71,10 +72,9 @@ const ProfileScreen = ({ onClose }) => {
 
       <div className="w-full max-w-sm h-screen bg-white shadow-2xl flex flex-col">
 
-        {/* Cerrar */}
         <div className="flex justify-end px-6 pt-4">
-          <button 
-            onClick={onClose} 
+          <button
+            onClick={onClose}
             className="text-purple-600 hover:text-purple-800 transition"
           >
             <X className="w-7 h-7" />
@@ -82,8 +82,7 @@ const ProfileScreen = ({ onClose }) => {
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 pb-6">
-          
-          {/* Perfil */}
+
           <div className="flex items-center gap-4 mb-8">
             <div className="w-25 h-25 rounded-full border-2 border-gray-500 flex items-center justify-center">
               <svg viewBox="0 0 24 24" className="w-12 h-12" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -94,12 +93,11 @@ const ProfileScreen = ({ onClose }) => {
             <h2 className="text-xl font-semibold text-gray-900">{user?.nombre}</h2>
           </div>
 
-          {/* Datos personales */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-medium text-gray-900">Mis datos personales</h3>
 
-              <button 
+              <button
                 onClick={() => editing ? handleUpdate() : setEditing(true)}
                 className="flex items-center gap-1 text-purple-600 hover:text-purple-800 transition"
               >
@@ -150,7 +148,6 @@ const ProfileScreen = ({ onClose }) => {
 
           <div className="border-t border-gray-400 my-6"></div>
 
-          {/* Feedback */}
           <div className="mb-6">
             <h3 className="text-lg font-medium text-gray-900 mb-3">
               Ayúdanos a seguir mejorando
@@ -166,8 +163,7 @@ const ProfileScreen = ({ onClose }) => {
 
           <div className="border-t border-gray-400 my-6"></div>
 
-          {/* Enviar feedback */}
-          <button 
+          <button
             onClick={handleSendFeedback}
             className="w-full bg-purple-100 hover:bg-purple-200 text-purple-700 py-4 rounded-lg flex items-center justify-center gap-2 font-medium mb-4 transition"
           >
@@ -175,8 +171,7 @@ const ProfileScreen = ({ onClose }) => {
             Enviar
           </button>
 
-          {/* Cerrar sesión */}
-          <button 
+          <button
             onClick={logout}
             className="text-lg w-full bg-white border-2 border-gray-400 hover:bg-gray-200 hover:border-gray-700 text-gray-900 py-4 rounded-lg font-medium transition"
           >

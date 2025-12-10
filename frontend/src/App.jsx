@@ -5,8 +5,9 @@ import RegisterScreen from './components/RegisterScreen';
 import ProfileScreen from './components/ProfileScreen';
 import SedeScreen from './components/SedeScreen';
 import LocationDetailScreen from './components/LocationDetailScreen';
+import NotificationsScreen from './components/NotificationsScreen';
 
-function AppContent({ screen, setScreen, selectedLocation, setSelectedLocation }) {
+function AppContent({ screen, setScreen, selectedLocation, setSelectedLocation, previousScreen, setPreviousScreen }) {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -25,7 +26,19 @@ function AppContent({ screen, setScreen, selectedLocation, setSelectedLocation }
   }
 
   if (screen === 'profile') {
-    return <ProfileScreen onClose={() => setScreen('sede')} />;
+    return (
+      <ProfileScreen 
+        onClose={() => setScreen(previousScreen || 'sede')}
+      />
+    );
+  }
+
+  if (screen === 'notifications') {
+    return (
+      <NotificationsScreen 
+        onBack={() => setScreen(previousScreen || 'sede')}
+      />
+    );
   }
 
   if (screen === 'location' && selectedLocation) {
@@ -35,6 +48,10 @@ function AppContent({ screen, setScreen, selectedLocation, setSelectedLocation }
         onBack={() => {
           setSelectedLocation(null);
           setScreen('sede');
+        }}
+        onOpenNotifications={() => {
+          setPreviousScreen('location');
+          setScreen('notifications');
         }}
       />
     );
@@ -46,7 +63,14 @@ function AppContent({ screen, setScreen, selectedLocation, setSelectedLocation }
         setSelectedLocation(ubicacion);
         setScreen('location');
       }}
-      onOpenProfile={() => setScreen('profile')}
+      onOpenProfile={() => {
+        setPreviousScreen('sede');
+        setScreen('profile');
+      }}
+      onOpenNotifications={() => {
+        setPreviousScreen('sede');
+        setScreen('notifications');
+      }}
     />
   );
 }
@@ -54,6 +78,7 @@ function AppContent({ screen, setScreen, selectedLocation, setSelectedLocation }
 export default function App() {
   const [screen, setScreen] = useState('login');
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [previousScreen, setPreviousScreen] = useState('sede');
 
   return (
     <AuthProvider>
@@ -62,6 +87,8 @@ export default function App() {
         setScreen={setScreen}
         selectedLocation={selectedLocation}
         setSelectedLocation={setSelectedLocation}
+        previousScreen={previousScreen}
+        setPreviousScreen={setPreviousScreen}
       />
     </AuthProvider>
   );

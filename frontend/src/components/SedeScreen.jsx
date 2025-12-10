@@ -3,7 +3,7 @@ import { Bell, User, Coffee, Headphones, Home, Sun } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { apiClient } from '../config/api';
 
-const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
+const SedeScreen = ({ onSelectLocation, onOpenProfile, onOpenNotifications }) => {
   const { user } = useAuth();
   const [ubicaciones, setUbicaciones] = useState([]);
 
@@ -30,14 +30,11 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm h-screen bg-white shadow-2xl flex flex-col">
 
-        {/* Header */}
         <div className="bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-6">
           <div className="flex justify-between items-center mb-4">
 
-            {/* Perfil + Nombre */}
             <div className="flex items-center gap-2">
 
-              {/* Botón icono usuario con hover */}
               <button 
                 onClick={onOpenProfile} 
                 className="w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-300 transition"
@@ -45,7 +42,6 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
                 <User className="w-5 h-5 text-purple-600" />
               </button>
 
-              {/* Nombre clickable con hover */}
               <button 
                 onClick={onOpenProfile}
                 className="text-white text-lg font-medium hover:text-gray-300 transition"
@@ -55,8 +51,10 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
 
             </div>
 
-            {/* Campana con hover */}
-            <button className="hover:text-gray-200 transition">
+            <button 
+              onClick={onOpenNotifications}
+              className="p-2 rounded-full hover:bg-white/20 transition"
+            >
               <Bell className="w-6 h-6 text-white" />
             </button>
 
@@ -65,11 +63,9 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
           <h1 className="text-white text-2xl font-bold">Sede</h1>
         </div>
 
-        {/* Lista de ubicaciones */}
         <div className="flex-1 overflow-y-auto">
           <div className="grid grid-cols-2">
 
-            {/* Parra */}
             <div className="border-r border-gray-300">
               <div className="py-4 text-center font-medium text-gray-900 border-b border-gray-300 text-2xl">
                 Parra
@@ -93,7 +89,6 @@ const SedeScreen = ({ onSelectLocation, onOpenProfile }) => {
               </div>
             </div>
 
-            {/* Tacna */}
             <div>
               <div className="py-4 text-center font-medium text-gray-900 border-b border-gray-300 text-2xl">
                 Tacna

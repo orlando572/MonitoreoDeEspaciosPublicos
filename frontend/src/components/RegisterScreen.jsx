@@ -14,7 +14,6 @@ const RegisterScreen = ({ onBack }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Estado del modal
   const [modal, setModal] = useState({
     isOpen: false,
     type: 'success',
@@ -35,7 +34,6 @@ const RegisterScreen = ({ onBack }) => {
         throw new Error(data.detail || 'Error al registrarse');
       }
 
-      // Mostrar modal exitoso
       setModal({
         isOpen: true,
         type: 'success',
@@ -61,7 +59,6 @@ const RegisterScreen = ({ onBack }) => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
 
-      {/* Modal */}
       <NotificationModal
         isOpen={modal.isOpen}
         onClose={handleCloseModal}

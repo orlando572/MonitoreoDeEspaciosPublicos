@@ -3,11 +3,13 @@ import { Bell, User, ArrowLeft, Coffee, Headphones, Home, Sun, Clock, Users, Tab
 import { useAuth } from '../context/AuthContext';
 import { apiClient } from '../config/api';
 import LoadingScreen from './LoadingScreen';
+import NotificationModal from './NotificationModal';
 
-const LocationDetailScreen = ({ ubicacion, onBack }) => {
+const LocationDetailScreen = ({ ubicacion, onBack, onOpenNotifications }) => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
+  const [showNotifyModal, setShowNotifyModal] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -42,11 +44,23 @@ const LocationDetailScreen = ({ ubicacion, onBack }) => {
     return date.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
   };
 
+  const handleNotifyClick = () => {
+    setShowNotifyModal(true);
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-sm h-screen bg-white shadow-2xl flex flex-col">
+      
+      <NotificationModal
+        isOpen={showNotifyModal}
+        onClose={() => setShowNotifyModal(false)}
+        type="error"
+        title="FUNCIÓN NO DISPONIBLE"
+        message="Las notificaciones estarán disponibles en una próxima versión de la aplicación."
+      />
 
-        <div className="bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-6 rounded-b-3xl">
+      <div className="w-full max-w-sm h-screen bg-white shadow-2xl flex flex-col">
+        <div className="bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-6">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-3">
               <button
@@ -62,7 +76,12 @@ const LocationDetailScreen = ({ ubicacion, onBack }) => {
                 <span className="text-white text-lg text-base font-medium">Hola, {user?.nombre?.split(' ')[0]}</span>
               </div>
             </div>
-            <Bell className="w-6 h-6 text-white" />
+            <button 
+              onClick={onOpenNotifications}
+              className="hover:bg-white/20 p-2 rounded-full transition"
+            >
+              <Bell className="w-6 h-6 text-white" />
+            </button>
           </div>
           <h1 className="text-white text-2xl font-bold">Uso del espacio</h1>
         </div>
@@ -86,7 +105,7 @@ const LocationDetailScreen = ({ ubicacion, onBack }) => {
             <>
               <div className="mb-6 rounded-2xl overflow-hidden border-2 border-gray-200">
                 <div className="w-full h-48 bg-gradient-to-br from-red-200 via-yellow-200 to-blue-200 flex items-center justify-center">
-                  <span className="text-gray-700 font-medium">Mapa de calor simulado</span>
+                  <span className="text-gray-700 font-medium">Mapa de calor no disponible</span>
                 </div>
               </div>
 
@@ -117,7 +136,10 @@ const LocationDetailScreen = ({ ubicacion, onBack }) => {
               </div>
 
               <div className="mt-8 flex justify-center">
-                <button className="text-lg bg-purple-100 text-purple-900 px-9 py-5 rounded-full flex items-center gap-2 font-medium hover:bg-purple-200 transition-colors">
+                <button 
+                  onClick={handleNotifyClick}
+                  className="text-lg bg-purple-100 text-purple-900 px-9 py-5 rounded-full flex items-center gap-2 font-medium hover:bg-purple-200 transition-colors"
+                >
                   <Bell className="w-5 h-5" />
                   Notificarme
                 </button>
